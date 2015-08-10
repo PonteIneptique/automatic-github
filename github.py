@@ -4,6 +4,7 @@ import json
 import os
 
 import lines
+import div1_div2
 
 def github_search(query, user, repo):
     page = 1
@@ -15,11 +16,10 @@ def github_search(query, user, repo):
     while len(items) < total_results:
         params = { 
             "q" : "{query} in:{repo} user:{user}".format(query=query.strip('"'), user=user, repo=repo),
-            "page" : 1,
+            "page" : page,
             "per_page" : 100
         }
         search = requests.get(url, params=params)
-        print(search.url)
         results = search.json()
 
         total_results = results["total_count"]
@@ -46,7 +46,10 @@ def github_search(query, user, repo):
 
     for item in items:
         print("Processing : " + item["name"])
-        lines.transform_lines(item["download"])
+        try:
+            div1_div2.transform(item["download"])
+        except Exception as E:
+            print(E)
 
 
 if __name__ == '__main__':

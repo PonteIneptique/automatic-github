@@ -1,0 +1,7 @@
+<refsDecl doctype="TEI.2"> <state unit="poem" n="chunk" delim="."/> </refsDecl>
+<refsDecl doctype="TEI.2"> <state unit="section"/> </refsDecl>
+<refsDecl doctype="TEI.2"> <state unit="book" delim="."/> <state unit="chapter" n="chunk"/> </refsDecl>
+
+# Need a small change
+
+<refsDecl doctype="TEI.2"> <state unit="book" delim="."/> <state unit="line"/> </refsDecl>

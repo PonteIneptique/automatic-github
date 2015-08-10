@@ -13,6 +13,17 @@ with open("utils/p4p5.xslt") as xsl:
 
 P4P5 = etree.XSLT(xslt_file)
 
+class DTDResolver(etree.Resolver):
+    def resolve(self, system_url, public_id, context):
+        if "perseus" in system_url:
+            newPath = "utils/" + system_url.split("/")[-1]
+            return self.resolve_filename(newPath, context)
+        else:
+            return self.resolve_filename(system_url, context)
+
+parser = etree.XMLParser(load_dtd=True)
+parser.resolvers.add( DTDResolver() )
+
 def parse(url):
     """ Parse the url and retrieve necessary informations
 
@@ -52,7 +63,7 @@ def parse(url):
     # Open it and parse it
     with open("cache/original-"+filename) as f:
         # We use the etree.parse property
-        parsed = etree.parse(f)
+        parsed = etree.parse(f, parser)
 
     return lang, urn, target, parsed
 
@@ -69,6 +80,12 @@ def write_and_clean(urn, lang, parsed, citations,target):
     """
 
     os.makedirs("cache", exist_ok=True)
+
+
+    if "grc" not in urn and "lat" not in urn:
+        type_text = "translation"
+    else:
+        type_text = "edition"
 
     """
         Change TEI.2 tag to TEI 
@@ -95,7 +112,7 @@ def write_and_clean(urn, lang, parsed, citations,target):
     div = etree.Element(
         "div",
         attrib = { 
-            "type":"edition",
+            "type":type_text,
             "n": urn,
             "{http://www.w3.org/XML/1998/namespace}lang" : lang
         }
@@ -204,5 +221,8 @@ def write_and_clean(urn, lang, parsed, citations,target):
         xmlfile.write("""<?xml version="1.0" encoding="UTF-8"?>\n"""+etree.tostring(New_Doc, encoding=str))
 
     # And now we write cts informations
-    cts.cts_metadata(urn)
+    try:
+        cts.cts_metadata(urn)
+    except Exception as E:
+        print(E)
 

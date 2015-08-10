@@ -22,6 +22,11 @@ def transform_lines(url):
 
     lang, urn, target, parsed = common.parse(url)
 
+    if "grc" not in urn and "lat" not in urn:
+        type_text = "translation"
+    else:
+        type_text = "edition"
+
     """
         Change div1 to div, moving their @type to @subtype 
     """    
@@ -52,7 +57,7 @@ def transform_lines(url):
     citations.append(
         MyCapytain.resources.texts.tei.Citation(
             name="line", 
-            refsDecl="/tei:TEI/tei:text/tei:body/div[@type='edition']//tei:l[@n='$1']"
+            refsDecl="/tei:TEI/tei:text/tei:body/div[@type='"+type_text+"']//tei:l[@n='$1']"
         )
     )
 

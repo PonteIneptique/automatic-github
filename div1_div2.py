@@ -1,6 +1,6 @@
 """ Div1 / Div2 old Perseus data to Div/Div + RefsDecl converter
 
-Authors : Aaron Plasek and Ariane Pinche
+Authors : Aaron Plasek, Ariane Pinche, Mark Moll, Ana Migowski
 Adaptation : Thibault Clérice
 
 Python 3 Script
@@ -33,7 +33,9 @@ import requests
 # Import library for CTS 
 import MyCapytain.resources.texts.tei
 
-def transform(url, urn, lang):
+import common
+
+def transform(url):
     """ Download an xml file and add line numbering and ctsize it
 
     :param url: A Perseus Github Raw address
@@ -45,37 +47,17 @@ def transform(url, urn, lang):
 
     """
 
-    """
-        Downloading the resource 
-    """
-    # Download the resource
-    response = requests.get(url)
-    # Ensure there was no errors
-    response.raise_for_status()
 
-    # Get the file name by splitting the url
-    filename = url.split("/")[-1]
+    lang, urn, target, parsed = common.parse(url)
 
-    """ 
-        Caching the resource 
-    """
-
-    # Save the original response
-    with open("original-"+filename, 'w') as f:
-        # Don't forget to write the reponse.text and not response itself
-        read_data = f.write(response.text)
-
-    # Open it and parse it
-    with open("original-"+filename) as f:
-        # We use the etree.parse property
-        parsed = etree.parse(f)
-
-    """
-        Change div1 to div, moving their @type to @subtype 
-    """    
+    if "grc" not in urn and "lat" not in urn:
+        type_text = "translation"
+    else:
+        type_text = "edition"
 
     # We find divs called div1
     div1_group = parsed.xpath("//div1")
+    i = 1
     for div1 in div1_group:
         # We change it's tag
         div1.tag = "div"
@@ -83,12 +65,17 @@ def transform(url, urn, lang):
         div1_subtype = div1.get("type")
         div1.set("subtype", div1_subtype)
         div1.set("type", "textpart")
+
+        if "n" not in dict(div1.attrib):
+            div1.set("n", str(i))
+        i += 1
                 
         
     """
         Change div2 to div, moving their @type to @subtype 
     """    
     # We find divs called div2
+    i = 1
     div2_group = parsed.xpath("//div2")
     for div2 in div2_group:
         # We change it's tag
@@ -97,11 +84,16 @@ def transform(url, urn, lang):
         div2_subtype = div2.get("type")
         div2.set("subtype", div2_subtype)
         div2.set("type", "textpart")
+
+        if "n" not in dict(div2.attrib):
+            div2.set("n", str(i))
+        i += 1
         
     """
         Change div3 to div, moving their @type to @subtype 
     """    
     # We find divs called div2
+    i = 1
     div3_group = parsed.xpath("//div3")
     for div3 in div3_group:
         # We change it's tag
@@ -111,41 +103,9 @@ def transform(url, urn, lang):
         div3.set("subtype", div3_subtype)
         div3.set("type", "textpart")
 
-    """
-        Change TEI.2 tag to TEI 
-    """
-    # We change the main tag
-    TEI = parsed.getroot()
-    # We change the root tag to TEI
-    TEI.tag = "TEI"
-    # We change the main tag
-    TEI = parsed.getroot()
-
-    """
-        Moving every children of //body into a new div with a @n attribute
-    """
-    body = parsed.xpath("//body")[0]
-    # Get its children
-    child_body = body.getchildren()
-
-    # For each child of body, remove it from body
-    for child in child_body:
-        body.remove(child)
-
-    # Create a new div with the informations
-    div = etree.Element(
-        "div",
-        attrib = { 
-            "type":"edition",
-            "n": urn,
-            "{http://www.w3.org/XML/1998/namespace}lang" : lang
-        }
-    )
-
-    # Add the full list of children of body to the newly created div
-    div.extend(child_body)
-    # Add this new div in body
-    body.append(div)
+        if "n" not in dict(div3.attrib):
+            div3.set("n", str(i))
+        i += 1
 
     """
         Add refsDecl information for CTS
@@ -156,7 +116,7 @@ def transform(url, urn, lang):
         citations.append(
             MyCapytain.resources.texts.tei.Citation(
                 name=div3_subtype, 
-                refsDecl="/tei:TEI/tei:text/tei:body/div[@type='edition']/div[@n='$1']/div[@n='$2']/div[@n='$3']"
+                refsDecl="/tei:TEI/tei:text/tei:body/div[@type='"+type_text+"']/div[@n='$1']/div[@n='$2']/div[@n='$3']"
             )
         )
     # Used only if div2 > 0
@@ -164,95 +124,21 @@ def transform(url, urn, lang):
         citations.append(
             MyCapytain.resources.texts.tei.Citation(
                 name=div2_subtype, 
-                refsDecl="/tei:TEI/tei:text/tei:body/div[@type='edition']/div[@n='$1']/div[@n='$2']"
+                refsDecl="/tei:TEI/tei:text/tei:body/div[@type='"+type_text+"']/div[@n='$1']/div[@n='$2']"
             )
         )
     citations.append(
         MyCapytain.resources.texts.tei.Citation(
             name=div1_subtype, 
-            refsDecl="/tei:TEI/tei:text/tei:body/div[@type='edition']/div[@n='$1']"
+            refsDecl="/tei:TEI/tei:text/tei:body/div[@type='"+type_text+"']/div[@n='$1']"
         )
     )
 
-    # Add them to the current encodingDesc
-    refsDecl = """<tei:refsDecl n="CTS" xmlns:tei="http://www.tei-c.org/ns/1.0">\n""" + "\n".join([str(citation) for citation in citations]) + """\n</tei:refsDecl>"""
-    # Parse it
-    refsDecl = etree.fromstring(refsDecl)
-    # Find encodingDesc
-    encodingDesc = parsed.xpath("//encodingDesc")[0]
-    encodingDesc.append(refsDecl)
-
-    """
-        Search for old //encodingDesc/refsDecl and refsDecl/state and correct them
-    """
-    refsDecls = parsed.xpath("//encodingDesc/refsDecl[@doctype]")
-    for refsDecl in refsDecls:
-        refsDecl.set("n", refsDecl.get("doctype"))
-        del refsDecl.attrib["doctype"]
-
-    states = parsed.xpath("//encodingDesc/refsDecl/state")
-    for state in states:
-        state.tag = "refState"
-
-    """
-        Change language@id to ident
-    """
-    languages = parsed.xpath("//langUsage/language[@id]") + parsed.xpath("//langUsage/lang[@id]")
-    for lang in languages:
-        lang.set("ident", lang.attrib["id"])
-        del lang.attrib["id"]
-
-    """
-        Change pb@id to pb@n
-    """
-    pbs = parsed.xpath("//pb[@id]")
-    for pb in pbs:
-        pb.set("n", pb.attrib["id"])
-        del pb.attrib["id"]
-
-    """
-        Clean keyboarding/p
-    """
-    ps = parsed.xpath("//sourceDesc/p")
-    for p in ps:
-        p.getparent().remove(p)
-
-    """
-        Clear attributes of text and body
-    """
-    body_text = parsed.xpath("//body") + parsed.xpath("//text")
-    for tag in body_text:
-        for key in tag.attrib:
-            del tag.attrib[key]
-
-    """
-        Fix anchored
-    """
-    anchoreds = parsed.xpath("//*[@anchored='yes']")
-    for anchored in anchoreds:
-        anchored.set("anchored", "true")
-
-    # Convert to xml
-    """ 
-        Create a new document so we can have tei namespace 
-    """
-    # And now some other CTS Magic
-    New_Root = etree.Element(
-        "{http://www.tei-c.org/ns/1.0}TEI",
-        nsmap = { None : "http://www.tei-c.org/ns/1.0" } # Creating a new element allows us to use a default namespace
-    )
-    New_Root.text = "\n"
-    # Add children of old root to New_Root
-    New_Root.extend(TEI.getchildren())
-
-    # We create a new document
-    New_Doc = etree.ElementTree(New_Root)
-    # And now some other CTS Magic
-    
-
-    # save xml
-    with open ("changed-"+filename, "w") as xmlfile:
-        xmlfile.write("""<?xml version="1.0" encoding="UTF-8"?>\n"""+etree.tostring(New_Doc, encoding=str))
+    try:
+        common.write_and_clean(urn, lang, parsed, citations, target)   
+    except Exception as E:
+        print(urn + " failed")
+        print(E)
 
 
 if __name__ == '__main__':

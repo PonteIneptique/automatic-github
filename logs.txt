@@ -1,0 +1,135 @@
+Processing : tlg0081.tlg007.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0007.tlg075.perseus-grc1.xml
+Processing : tlg0081.tlg002.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0007.tlg119.perseus-grc1.xml
+Processing : tlg0007.tlg082b.perseus-grc2.xml
+Processing : tlg0007.tlg128.perseus-grc1.xml
+Processing : tlg0007.tlg131.perseus-grc1.xml
+Processing : tlg0007.tlg074.perseus-grc1.xml
+Processing : tlg0007.tlg082b.perseus-grc1.xml
+Processing : tlg0007.tlg100.perseus-eng1.xml
+Processing : tlg0007.tlg120.perseus-grc1.xml
+Processing : tlg0007.tlg073.perseus-grc1.xml
+Processing : tlg0007.tlg116.perseus-grc1.xml
+Processing : stoa0255.stoa011.perseus-lat1.xml
+Processing : tlg0007.tlg115.perseus-grc1.xml
+Processing : tlg0007.tlg130.perseus-grc1.xml
+Processing : tlg0081.tlg008.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0081.tlg011.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0007.tlg072.perseus-grc1.xml
+Processing : tlg0007.tlg082b.perseus-eng1.xml
+Processing : tlg0007.tlg069.perseus-grc1.xml
+Processing : tlg0007.tlg128.perseus-eng1.xml
+Processing : tlg0007.tlg127.perseus-grc1.xml
+Processing : tlg0007.tlg078.perseus-grc1.xml
+Processing : tlg0081.tlg009.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0007.tlg132.perseus-eng1.xml
+Processing : tlg0007.tlg133.perseus-grc1.xml
+Processing : tlg0007.tlg082a.perseus-eng1.xml
+Processing : phi0474.phi041.perseus-lat1.xml
+Processing : tlg0007.tlg131.perseus-eng1.xml
+Processing : tlg0081.tlg004.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0081.tlg005.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0007.tlg071.perseus-grc1.xml
+Processing : tlg0007.tlg081.perseus-grc2.xml
+Processing : tlg0081.tlg003.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : phi1351.phi002.perseus-lat1.xml
+Processing : tlg0007.tlg129.perseus-grc1.xml
+Processing : stoa0255.stoa012.perseus-lat1.xml
+Processing : tlg0007.tlg121.perseus-grc1.xml
+Processing : tlg0007.tlg082.perseus-grc2.xml
+Processing : tlg0007.tlg076.perseus-grc1.xml
+Processing : tlg0074.tlg003.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0007.tlg087.perseus-grc2.xml
+Processing : tlg0007.tlg088.perseus-eng1.xml
+Processing : tlg0007.tlg079.perseus-grc1.xml
+Processing : tlg0081.tlg015.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0007.tlg098.perseus-eng1.xml
+Processing : tlg0086.tlg003.perseus-grc1.xml
+Processing : stoa0255.stoa008.perseus-lat1.xml
+Processing : stoa0255.stoa009.perseus-lat1.xml
+Processing : tlg0007.tlg077.perseus-grc1.xml
+Processing : tlg0007.tlg117.perseus-grc1.xml
+Processing : tlg0007.tlg118.perseus-grc1.xml
+Processing : tlg0007.tlg081.perseus-grc1.xml
+Processing : tlg0007.tlg070.perseus-grc1.xml
+Processing : tlg0074.tlg005.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : phi0474.phi042.perseus-lat1.xml
+Processing : tlg0093.tlg009.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0007.tlg133.perseus-eng1.xml
+Processing : phi1351.phi001.perseus-lat1.xml
+Processing : tlg0007.tlg068.perseus-grc1.xml
+Processing : tlg0007.tlg082.perseus-grc1.xml
+Processing : phi1017.phi014.perseus-lat1.xml
+Processing : stoa0255.stoa014.perseus-lat1.xml
+Processing : tlg0007.tlg087.perseus-grc1.xml
+Processing : stoa0255.stoa007.perseus-lat1.xml
+Processing : tlg0007.tlg102.perseus-eng1.xml
+Processing : tlg0081.tlg010.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0655.tlg001.perseus-grc1.xml
+Processing : stoa0255.stoa006.perseus-lat1.xml
+Processing : stoa0255.stoa013.perseus-lat1.xml
+Processing : tlg0007.tlg086.perseus-eng2.xml
+Processing : tlg1216.tlg001.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0058.tlg001.perseus-grc1.xml
+Processing : phi0474.phi038.perseus-lat1.xml
+Processing : tlg2040.tlg002.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0556.tlg001.perseus-grc1.xml
+Processing : tlg0074.tlg002.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0613.tlg001.perseus-grc1.xml
+Processing : tlg0007.tlg117.perseus-eng1.xml
+Processing : phi1351.phi003.perseus-lat1.xml
+Processing : tlg0007.tlg096.perseus-eng1.xml
+Processing : tlg0007.tlg121.perseus-eng2.xml
+Processing : tlg0007.tlg087.perseus-eng2.xml
+Processing : tlg0007.tlg097.perseus-eng1.xml
+Processing : tlg0648.tlg001.perseus-grc1.xml
+Processing : tlg0007.tlg095.perseus-eng1.xml
+Processing : tlg0560.tlg001.perseus-grc1.xml
+Processing : tlg0094.tlg002.perseus-eng1.xml
+Processing : tlg0561.tlg001.perseus-grc1.xml
+Processing : tlg0007.tlg123.perseus-eng1.xml
+Processing : tlg0007.tlg101.perseus-eng1.xml
+Processing : tlg0007.tlg067.perseus-eng1.xml
+Processing : tlg0007.tlg101.perseus-eng2.xml
+Processing : phi0448.phi002.perseus-lat1.xml
+Processing : tlg0638.tlg003.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0641.tlg001.perseus-grc1.xml
+Processing : stoa0255.stoa010.perseus-lat1.xml
+Processing : phi1014.phi003.perseus-lat1.xml
+Processing : tlg0007.tlg082.perseus-eng1.xml
+Processing : phi0474.phi039.perseus-lat1.xml
+Processing : tlg0007.tlg087.perseus-eng1.xml
+Processing : phi1242.phi001.perseus-lat1.xml
+Processing : phi0474.phi040.perseus-lat1.xml
+Processing : tlg0007.tlg118.perseus-eng1.xml
+Processing : tlg0007.tlg121.perseus-eng1.xml
+Processing : tlg0007.tlg089.perseus-eng2.xml
+Processing : phi1014.phi002.perseus-lat1.xml
+Processing : tlg0007.tlg070.perseus-eng1.xml
+Processing : tlg0007.tlg081.perseus-eng1.xml
+Processing : phi1017.phi013.perseus-lat1.xml
+Processing : tlg0007.tlg129.perseus-eng1.xml
+Processing : tlg0007.tlg089.perseus-eng1.xml
+Processing : tlg0081.tlg012.perseus-grc1.xml
+404 Client Error: Not Found
+Processing : tlg0007.tlg126.perseus-eng2.xml
+Processing : tlg0057.tlg010.perseus-eng1.xml
+Processing : phi0631.phi002.perseus-eng1.xml

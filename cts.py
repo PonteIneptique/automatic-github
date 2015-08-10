@@ -45,11 +45,27 @@ def cts_metadata(urn):
 
     work.set("groupUrn", urn["textgroup"])
 
-    ed_tr = work.xpath(".//ti:edition|ti:translation", namespaces=ns)[0]
+    ed_tr = work.xpath(".//ti:edition|.//ti:translation", namespaces=ns)[0]
     ed_tr.set("workUrn", urn["work"])
 
     with open(group_file, "w") as g:
         g.write(etree.tostring(textgroup, encoding=str))
+
+    try:
+        with open(work_file) as w:
+            e = etree.parse(w)
+            root = e.getroot()
+
+            for ed in root.xpath("./ti:edition|./ti:translation", namespaces=ns):
+                if ed.get("urn") == str(urn):
+                    ed.getparent().remove(ed)
+
+            root.extend(work.xpath("./ti:edition|./ti:translation", namespaces=ns))
+
+            work = root
+
+    except Exception as E:
+        pass
 
     with open(work_file, "w") as w:
         w.write(etree.tostring(work, encoding=str))
