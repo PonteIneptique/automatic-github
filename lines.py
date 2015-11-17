@@ -57,7 +57,7 @@ def transform_lines(url):
     citations.append(
         MyCapytain.resources.texts.tei.Citation(
             name="line", 
-            refsDecl="/tei:TEI/tei:text/tei:body/div[@type='"+type_text+"']//tei:l[@n='$1']"
+            refsDecl="/tei:TEI/tei:text/tei:body/tei:div[@type='"+type_text+"']//tei:l[@n='$1']"
         )
     )
 

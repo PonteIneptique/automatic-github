@@ -4,7 +4,7 @@ import json
 import os
 
 import lines
-import div1_div2
+import div_alone as div1_div2
 
 def github_search(query, user, repo):
     page = 1
@@ -45,9 +45,10 @@ def github_search(query, user, repo):
         json.dump(items, f)
 
     for item in items:
+        div1_div2.transform(item["download"])
         print("Processing : " + item["name"])
         try:
-            div1_div2.transform(item["download"])
+            pass
         except Exception as E:
             print(E)
 

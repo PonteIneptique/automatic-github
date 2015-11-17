@@ -33,7 +33,7 @@ import requests
 # Import library for CTS 
 import MyCapytain.resources.texts.tei
 
-import common
+import commontei as common
 
 def transform(url):
     """ Download an xml file and add line numbering and ctsize it
@@ -56,11 +56,9 @@ def transform(url):
         type_text = "edition"
 
     # We find divs called div1
-    div1_group = parsed.xpath("//div1")
+    div1_group = parsed.xpath("//tei:div[@n]", namespaces=common.ns)
     i = 1
     for div1 in div1_group:
-        # We change it's tag
-        div1.tag = "div"
         # To deal with different subtype, we get the former attribute value of type and put it to subtype
         div1_subtype = div1.get("type")
         div1.set("subtype", div1_subtype)
@@ -70,63 +68,12 @@ def transform(url):
             div1.set("n", str(i))
         i += 1
                 
-        
-    """
-        Change div2 to div, moving their @type to @subtype 
-    """    
-    # We find divs called div2
-    i = 1
-    div2_group = parsed.xpath("//div2")
-    for div2 in div2_group:
-        # We change it's tag
-        div2.tag = "div"
-        # To deal with different subtype, we get the former attribute value of type and put it to subtype
-        div2_subtype = div2.get("type")
-        div2.set("subtype", div2_subtype)
-        div2.set("type", "textpart")
-
-        if "n" not in dict(div2.attrib):
-            div2.set("n", str(i))
-        i += 1
-        
-    """
-        Change div3 to div, moving their @type to @subtype 
-    """    
-    # We find divs called div2
-    i = 1
-    div3_group = parsed.xpath("//div3")
-    for div3 in div3_group:
-        # We change it's tag
-        div3.tag = "div"
-        # To deal with different subtype, we get the former attribute value of type and put it to subtype
-        div3_subtype = div3.get("type")
-        div3.set("subtype", div3_subtype)
-        div3.set("type", "textpart")
-
-        if "n" not in dict(div3.attrib):
-            div3.set("n", str(i))
-        i += 1
 
     """
         Add refsDecl information for CTS
     """
     citations = []
-    # Used only if div3 > 0
-    if len(div3_group) > 0:
-        citations.append(
-            MyCapytain.resources.texts.tei.Citation(
-                name=div3_subtype, 
-                refsDecl="/tei:TEI/tei:text/tei:body/tei:div[@type='"+type_text+"']/tei:div[@n='$1']/tei:div[@n='$2']/tei:div[@n='$3']"
-            )
-        )
-    # Used only if div2 > 0
-    if len(div2_group) > 0:
-        citations.append(
-            MyCapytain.resources.texts.tei.Citation(
-                name=div2_subtype, 
-                refsDecl="/tei:TEI/tei:text/tei:body/tei:div[@type='"+type_text+"']/tei:div[@n='$1']/tei:div[@n='$2']"
-            )
-        )
+
     citations.append(
         MyCapytain.resources.texts.tei.Citation(
             name=div1_subtype, 
@@ -134,8 +81,9 @@ def transform(url):
         )
     )
 
+    common.write_and_clean(urn, lang, parsed, citations, target)  
     try:
-        common.write_and_clean(urn, lang, parsed, citations, target)   
+        print("hi") 
     except Exception as E:
         print(urn + " failed")
         print(E)
